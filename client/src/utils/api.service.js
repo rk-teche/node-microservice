@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const getUrl = (url) => `${"http://localhost:4000"}/${url}`;
-axios.post();
 
 const getReq = (url) =>
 {
-    return axios.get(getUrl(url))
+    const appURL = getUrl(url);
+    return axios.get(appURL)
         .then(response =>
         {
             // Check if the status is OK (200)
