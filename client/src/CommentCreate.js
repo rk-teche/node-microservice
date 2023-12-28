@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
+import { CommentUrl } from "./utils/Constant";
 
 export default ({ id }) =>
 {
@@ -8,7 +9,7 @@ export default ({ id }) =>
     const onSubmit = async (event) =>
     {
         event.preventDefault();
-        postReq(`posts/${id}/comments`, {
+        postReq(`${CommentUrl}/posts/${id}/comments`, {
             content
         }).then(_ =>
         {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CommentCreate from "./CommentCreate";
+import CommentList from "./CommentList";
 import { getReq } from "./utils/api.service";
+import { PostUrl } from "./utils/Constant";
 
 export default () =>
 {
@@ -8,7 +10,7 @@ export default () =>
 
     const fetchPosts = async () =>
     {
-        getReq("posts").then(setPosts);
+        getReq(`${PostUrl}/posts`).then(setPosts);
     };
 
     useEffect(() => 
@@ -26,6 +28,7 @@ export default () =>
                         <div className="card" key={post.id}>
                             <div className="card-body">
                                 <h3>{post.title}</h3>
+                                <CommentList id={post.id} />
                                 <CommentCreate id={post.id} />
                             </div>
                         </div>

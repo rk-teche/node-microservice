@@ -1,11 +1,8 @@
 import axios from 'axios';
 
-const getUrl = (url) => `${"http://localhost:4000"}/${url}`;
-
 const getReq = (url) =>
 {
-    const appURL = getUrl(url);
-    return axios.get(appURL)
+    return axios.get(url)
         .then(response =>
         {
             // Check if the status is OK (200)
@@ -26,8 +23,7 @@ const getReq = (url) =>
 
 const postReq = (url, data) =>
 {
-    const appURL = getUrl(url);
-    return axios.post(appURL, data)
+    return axios.post(url, data)
         .then(response =>
         {
             if (response.status === 200 || response.status === 201)
@@ -46,7 +42,7 @@ const postReq = (url, data) =>
 
 const putReq = (url, data) =>
 {
-    return axios.put(getUrl(url), data)
+    return axios.put(url, data)
         .then(response =>
         {
             if (response.status === 200)
@@ -65,7 +61,7 @@ const putReq = (url, data) =>
 
 const deleteReq = (url) =>
 {
-    return axios.delete(getUrl(url))
+    return axios.delete(url)
         .then(response =>
         {
             if (response.status === 200 || response.status === 204)

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
+import { PostUrl } from "./utils/Constant";
 
 export default () =>
 {
@@ -15,7 +16,7 @@ export default () =>
     const handleSubmit = (event) => 
     {
         setLoading(true);
-        postReq('posts/', { title })
+        postReq(`${PostUrl}/posts`, { title })
             .then(data => 
             {
                 setTitle("");
