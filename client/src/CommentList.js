@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
 import { CommentUrl } from "./utils/Constant";
 
-export default ({ id }) =>
+export default ({ id, comments = [] }) =>
 {
-    const [comments, setComments] = useState([]);
+    // const [comments, setComments] = useState([]);
 
-    const fetchComments = async () =>
-    {
-        getReq(`${CommentUrl}/posts/${id}/comments`).then(setComments);
-    };
+    // const fetchComments = async () =>
+    // {
+    //     getReq(`${CommentUrl}/posts/${id}/comments`).then(setComments);
+    // };
 
-    useEffect(() => 
-    {
-        fetchComments();
-    }, []);
+    // useEffect(() => 
+    // {
+    //     fetchComments();
+    // }, []);
 
     return (
         <ul className="">

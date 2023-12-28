@@ -2,6 +2,7 @@ import Express from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
 import bodyParser from "body-parser";
+import axios from "axios";
 
 const app = Express();
 app.use(cors());
@@ -17,7 +18,7 @@ app.get("/posts/:id/comments", (req, res) =>
     res.send(postComments);
 });
 
-app.post("/posts/:id/comments", (req, res) => 
+app.post("/posts/:id/comments", async (req, res) => 
 {
     const id = randomBytes(4).toString("hex");
 
@@ -28,10 +29,22 @@ app.post("/posts/:id/comments", (req, res) =>
     const { content } = req.body;
     const comments = commentsByPostId[postId] || [];
     const currentComment = { id, content, postId };
+
+    await axios.post(`http://localhost:4005/events`, {
+        type: "CommentCreated",
+        data: currentComment
+    });
     comments.push(currentComment);
     commentsByPostId[postId] = comments;
 
     res.status(201).send(currentComment);
+});
+
+
+app.post("/events", (req, res) => 
+{
+    console.log("received Event", req.body.type);
+    res.send({});
 });
 
 app.listen(4001, () => console.log("Listening @4001"));
