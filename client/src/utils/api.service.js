@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const getUrl = (url) => `${"localhost:4000"}/${url}`;
+const getUrl = (url) => `${"http://localhost:4000"}/${url}`;
+axios.post();
 
 const getReq = (url) =>
 {
@@ -19,14 +20,14 @@ const getReq = (url) =>
         .catch(error =>
         {
             // Handle any other errors
-            throw error;
+            throw new Error(error);
         });
 };
 
 const postReq = (url, data) =>
 {
     const appURL = getUrl(url);
-    return axios.post(appURL``, data)
+    return axios.post(appURL, data)
         .then(response =>
         {
             if (response.status === 200 || response.status === 201)
