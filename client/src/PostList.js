@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getReq, postReq } from "./utils/api.service";
+import CommentCreate from "./CommentCreate";
+import { getReq } from "./utils/api.service";
 
 export default () =>
 {
@@ -25,6 +26,7 @@ export default () =>
                         <div className="card" key={post.id}>
                             <div className="card-body">
                                 <h3>{post.title}</h3>
+                                <CommentCreate id={post.id} />
                             </div>
                         </div>
                     );
