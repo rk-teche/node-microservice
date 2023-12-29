@@ -21,6 +21,17 @@ export default ({ id, comments = [] }) =>
             {
                 comments.map(comment =>
                 {
+                    switch (comment.status)
+                    {
+                        case "pending":
+                            comment.content = "awaiting moderation";
+                            break;
+                        case "rejected":
+                            comment.content = "comment is rejected";
+                            break;
+                    }
+
+
                     return (
                         <li className="" key={comment.id}>
                             {comment.content}

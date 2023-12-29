@@ -33,4 +33,21 @@ app.post("/events", async (req, res) =>
     res.send({});
 });
 
-app.listen(4003, () => console.log("Listening @4003"));
+app.listen(4003, async () => 
+{
+    console.log("Listening @4003");
+    try
+    {
+        const res = await axios.get("http://localhost:4005/events");
+
+        for (let event of res.data)
+        {
+            console.log("Processing events", event.type);
+            handleEvent(event);
+        }
+    }
+    catch (error)
+    {
+        console.log(error.message);
+    }
+});
