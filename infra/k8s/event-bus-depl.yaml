@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1 # number of Pods we want to create
+  selector:
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: rkteche/event-bus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  # If not define then K8s will automatically create ClusterIP service  
+  selector:
+    app: event-bus # find all the pod with label posts, which we define in `post-depl.yaml` file
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 4005 # Node Port service port
+      targetPort: 4005 # actual port that our application is listing for traffic on
+      # port and targetPort may not be identical
+
+

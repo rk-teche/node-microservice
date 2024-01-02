@@ -3,11 +3,13 @@ import cors from "cors";
 import { randomBytes } from "crypto";
 import bodyParser from "body-parser";
 import axios from "axios";
+// import { EVENT_BUS_URL } from "./Constant";
 
 const app = Express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const EVENT_BUS_URL = "http://event-bus-srv:4005";
 const posts = {};
 
 app.get("/posts", (req, res) => 
@@ -24,7 +26,7 @@ app.post("/posts", async (req, res) =>
 
     posts[id] = { title, id };
 
-    await axios.post(`http://localhost:4005/events`, {
+    await axios.post(`${EVENT_BUS_URL}/events`, {
         type: "PostCreated",
         data: posts[id]
     });
@@ -38,4 +40,4 @@ app.post("/events", (req, res) =>
     res.send({});
 });
 
-app.listen(4000, () => console.log("Listening @4000"));
+app.listen(4000, () => console.log("Listening @4000 hello"));

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1 # number of Pods we want to create
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: rkteche/post-service:latest  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-cluster-srv
+spec:
+  # If not define then K8s will automatically create ClusterIP service
+  selector:
+    app: posts # find all the pod with label posts, which we define in `post-depl.yaml` file
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000 # Node Port service port
+      targetPort: 4000 # actual port that our application is listing for traffic on
+      # port and targetPort may not be identical
