@@ -3,7 +3,6 @@ import cors from "cors";
 import { randomBytes } from "crypto";
 import bodyParser from "body-parser";
 import axios from "axios";
-// import { EVENT_BUS_URL } from "./Constant";
 
 const app = Express();
 app.use(cors());

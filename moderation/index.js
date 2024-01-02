@@ -9,6 +9,8 @@ const app = Express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const EVENT_BUS_URL = "http://event-bus-srv:4005";
+
 const posts = {};
 
 app.get("/posts", (req, res) => 
@@ -24,7 +26,7 @@ app.post("/events", async (req, res) =>
     {
         const { content = "" } = data;
         data.status = !content.includes(validationText) ? "approved" : "rejected";
-        await axios.post("http://localhost:4005/events", {
+        await axios.post(`${EVENT_BUS_URL}/events`, {
             type: "CommentModerated",
             data
         });
@@ -38,7 +40,7 @@ app.listen(4003, async () =>
     console.log("Listening @4003");
     try
     {
-        const res = await axios.get("http://localhost:4005/events");
+        const res = await axios.get(`${EVENT_BUS_URL}/events`);
 
         for (let event of res.data)
         {

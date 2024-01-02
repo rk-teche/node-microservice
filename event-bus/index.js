@@ -11,6 +11,9 @@ app.use(bodyParser.json());
 const posts = {};
 const events = [];
 const POST_URL = "http://posts-cluster-srv:4000";
+const COMMENT_URL = "http://comment-cluster-srv:4001";
+const QUERY_URL = "http://query-cluster-srv:4002";
+const MODERATION_URL = "http://moderation-cluster-srv:4003";
 
 app.get("/posts", (req, res) => 
 {
@@ -28,9 +31,9 @@ app.post("/events", (req, res) =>
     events.push(event);
 
     axios.post(`${POST_URL}/events`, event);
-    // axios.post("http://localhost:4001/events", event);
-    // axios.post("http://localhost:4002/events", event);
-    // axios.post("http://localhost:4003/events", event);
+    axios.post(`${COMMENT_URL}/events`, event);
+    axios.post(`${QUERY_URL}/events`, event);
+    axios.post(`${MODERATION_URL}/events`, event);
 
     res.send({ status: "OK" });
 });

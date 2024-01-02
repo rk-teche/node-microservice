@@ -8,6 +8,8 @@ const app = Express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const EVENT_BUS_URL = "http://event-bus-srv:4005";
+
 const commentsByPostId = {};
 
 app.get("/posts/:id/comments", (req, res) => 
@@ -30,7 +32,7 @@ app.post("/posts/:id/comments", async (req, res) =>
     const comments = commentsByPostId[postId] || [];
     const currentComment = { id, content, postId, status: "pending" };
 
-    await axios.post(`http://localhost:4005/events`, {
+    await axios.post(`${EVENT_BUS_URL}/events`, {
         type: "CommentCreated",
         data: currentComment
     });
@@ -52,7 +54,7 @@ app.post("/events", async (req, res) =>
         comments = comments.map(comment => comment.id === id ? data : comment);
         commentsByPostId[postId] = comments;
 
-        await axios.post("http://localhost:4005/events", {
+        await axios.post(`${EVENT_BUS_URL}/events`, {
             type: "CommentUpdated",
             data
         });

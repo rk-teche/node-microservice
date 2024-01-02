@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1 # number of Pods we want to create
+  selector:
+    matchLabels:
+      app: moderation
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: rkteche/moderation-service:latest  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-cluster-srv
+spec:
+  # If not define then K8s will automatically create ClusterIP service
+  selector:
+    app: moderation # find all the pod with label moderation, which we define in `post-depl.yaml` file
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003 # Node Port service port
+      targetPort: 4003 # actual port that our application is listing for traffic on
+      # port and targetPort may not be identical
