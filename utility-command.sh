@@ -17,13 +17,13 @@ kubectl apply -f posts-srv.yaml
 kubectl apply -f posts-depl.yaml
 kubectl apply -f event-bus-depl.yaml
 
-kubectl apply -f comment-depl.yaml
+kubectl apply -f comments-depl.yaml
 kubectl apply -f query-depl.yaml
 kubectl apply -f moderation-depl.yaml
 
 kubectl rollout restart deployment posts-depl
 kubectl rollout restart deployment event-bus-depl
 
-kubectl rollout restart deployment comment-depl
+kubectl rollout restart deployment comments-depl
 kubectl rollout restart deployment query-depl
 kubectl rollout restart deployment moderation-depl
