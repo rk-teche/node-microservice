@@ -1,18 +1,16 @@
+import { AnyARecord } from "dns";
 import React, { useEffect, useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
 import { CommentUrl } from "./utils/Constant";
 
-export default ({ id }) =>
-{
+export default ({ id }: any) => {
     const [content, setContent] = useState("");
 
-    const onSubmit = async (event) =>
-    {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
         postReq(`${CommentUrl}/posts/${id}/comments`, {
             content
-        }).then(_ =>
-        {
+        }).then(_ => {
             setContent("");
         });
 

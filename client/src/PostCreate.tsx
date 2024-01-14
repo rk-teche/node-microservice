@@ -2,28 +2,23 @@ import React, { useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
 import { PostUrl } from "./utils/Constant";
 
-export default () =>
-{
+export default () => {
     const [title, setTitle] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (event) => 
-    {
+    const handleChange = (event: any) => {
         setTitle(event.target.value);
     };
 
-    const handleSubmit = (event) => 
-    {
+    const handleSubmit = (event: any) => {
         setLoading(true);
         postReq(`${PostUrl}/posts`, { title })
-            .then(data => 
-            {
+            .then(data => {
                 setTitle("");
                 setLoading(false);
             })
-            .catch(error => 
-            {
+            .catch(error => {
                 setError(error);
                 setLoading(false);
             });

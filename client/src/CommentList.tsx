@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getReq, postReq } from "./utils/api.service";
 import { CommentUrl } from "./utils/Constant";
 
-export default ({ id, comments = [] }) =>
-{
+export default ({ id, comments = [] }: any) => {
     // const [comments, setComments] = useState([]);
 
     // const fetchComments = async () =>
@@ -19,8 +18,7 @@ export default ({ id, comments = [] }) =>
     return (
         <ul className="">
             {
-                comments.map(comment =>
-                {
+                comments.map((comment: any) => {
                     switch (comment.status)
                     {
                         case "pending":

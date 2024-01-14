@@ -4,17 +4,14 @@ import CommentList from "./CommentList";
 import { getReq } from "./utils/api.service";
 import { PostUrl, QueryUrl } from "./utils/Constant";
 
-export default () =>
-{
+export default () => {
     const [posts, setPosts] = useState({});
 
-    const fetchPosts = async () =>
-    {
+    const fetchPosts = async () => {
         getReq(`${QueryUrl}/posts`).then(setPosts);
     };
 
-    useEffect(() => 
-    {
+    useEffect(() => {
         fetchPosts();
     }, []);
 
@@ -22,8 +19,7 @@ export default () =>
     return (
         <div className="d-flex flex-row flex-wrap justify-content-between">
             {
-                renderedPost.map(post =>
-                {
+                renderedPost.map((post: any) => {
                     return (
                         <div className="card" key={post.id}>
                             <div className="card-body">
