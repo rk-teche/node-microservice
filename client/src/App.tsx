@@ -17,7 +17,7 @@ export const App = () => {
     //     setIntervalCount(intervalCount + 1);
     // }, 1000);
 
-    console.log("render", intervalCount);
+    console.log("hello");
 
     // const memoizedIncrement = useCallback(increment, [count]);
 

@@ -1,1 +1,0 @@
-export const POST_URL = "http://posts-cluster-srv:4000";
